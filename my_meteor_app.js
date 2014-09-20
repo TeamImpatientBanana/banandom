@@ -5,7 +5,7 @@ if (Meteor.isClient) {
   //  return Scoreboard.find({}, { sort: { score: -1 } } ).limit(50);
   //}
   Template.entryfield.events = {
-    "click button.entryfield": function(event){
+    "click #submitData": function(event){
       // Submit the form
       var name = document.getElementById('name');
       var seedWord = document.getElementById('seedWord');
