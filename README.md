@@ -1,4 +1,0 @@
-banandom
-========
-
-Random banana game
