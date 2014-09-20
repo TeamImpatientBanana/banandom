@@ -3,3 +3,13 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(action='/addscore', method='post', name='addScore')
+    input(type='text', name='userName', placeholder='Name or Twitter handle')
+    input(type='text', name='seedWord', placeholder='Type in a word')
+    input(type='submit', value='Submit')
+
+  ul
+    each user in users
+      li= user.userName
+      li= user.score
