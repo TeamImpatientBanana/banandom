@@ -21,7 +21,7 @@ if (Meteor.isClient) {
         });
 
         name.value = '';
-        //message.value = '';
+        //score.value = '';
       }
     }
   }
