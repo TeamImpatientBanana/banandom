@@ -1,9 +1,10 @@
 Scoreboard = new Meteor.Collection('Scoreboard');
 if (Meteor.isClient) {
-  var scores = Meteor.subscribe("scores");
-  //Template.scoreboard.scores = function(){
-  //  return Scoreboard.find({}, { sort: { score: -1 } } ).limit(50);
-  //}
+  Meteor.subscribe("scores");
+  Template.scoreboard.scores = function(){
+    return Scoreboard.find({}, { sort: { score: -1 } } );
+  }
+
   Template.entryfield.events = {
     "click #submitData": function(event){
       // Submit the form
@@ -20,7 +21,7 @@ if (Meteor.isClient) {
         });
 
         name.value = '';
-        message.value = '';
+        //message.value = '';
       }
     }
   }
