@@ -1,8 +1,6 @@
 newSeed = function(seed) {
 
 	//seed = require('crypto').createHash('md5').update(seed).digest("hex");
-	var date = (new Date()).getTime();
-	var hash = CryptoJS.HmacSHA256(seed, date).toString();
 
 	var splitSeed = seed.split("");
 	console.log("splitSeed first split = "+splitSeed);
@@ -29,7 +27,7 @@ newSeed = function(seed) {
 	//score = possiblyReverseScore(score);
 
 	return score;
-}
+};
 
 function md5ArrayToRandomAssNumberArray (splitSeed){
 	switch(splitSeed) {
@@ -89,14 +87,14 @@ function multipliers(arrayPiece) {
 }
 
 function possiblyReverseScore(score) {
-	var time = (new Date).getTime();
+	var time = (new Date()).getTime();
 	leftovers = time % 2;
 	if (leftovers == 1) {
 		score = toString(score);
 		score = score.split("");
 		score = score.reverse();
-		var score = score.join("");
-		score = toNumber(score)
+		score = score.join("");
+		score = toNumber(score);
 		return score;
 	}
 	return score;
@@ -107,5 +105,5 @@ function toString(number) {
 }
 
 function toNumber(string) {
-	return parseInt(string);
+	return parseInt(string, 10);
 }

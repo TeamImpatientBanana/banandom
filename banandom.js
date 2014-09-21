@@ -6,36 +6,47 @@ if (Meteor.isClient) {
   
   Template.scoreboard.scores = function(){
     return Scoreboard.find({}, { sort: { score: -1 } } );
-  }
+  };
 
   Template.entryfield.events = {
-    "click #submitData": function(event){
+    "keydown #handle": function(event){
+      if (event.which === 13) {
 
-      // Submit the form
-      var name = document.getElementById('name').value;
-      var seedWord = document.getElementById('seedWord').value;
+        // Submit the form
+        var seedWord = document.getElementById('seed').value;
+        var handle = document.getElementById('handle').value;
+        console.log(seedWord);
+        console.log(handle);
 
-      Meteor.call('calculatedScoreMethod', seedWord, function (err, data) {
-        if (!err) {
-          console.log(data);
+        if (seedWord !== '') {
+          Meteor.call('calculatedScoreMethod', seedWord, function (err, data) {
+            if (!err) {
 
-          if(name.value != '' && seedWord.value != ''){
-            Scoreboard.insert({
-              name: name.value,
-              score: data,
-              time: Date.now()
-            });
+              console.log(data);
+              Template.yourScore.score = data;
 
-          name.value = '';
-          seedWord.value = '';
-          }
+              if(handle !== ''){
+
+                Scoreboard.insert({
+                  name: handle,
+                  score: data,
+                  time: Date.now()
+                });
+
+                seedWord = document.getElementById('seed');
+                handle = document.getElementById('handle');
+                seedWord.value = '';
+                handle.value = '';
+              }
+            }
+            else {
+              console.log(err);
+            }
+          });
         }
-        else {
-          console.log(err);
-        }
-      });
+      }
     }
-  }
+  };
 }
 
 if (Meteor.isServer) {
@@ -51,9 +62,11 @@ if (Meteor.isServer) {
   });
   Meteor.methods({
     calculatedScoreMethod: function(seedWord) {
-      //var calculatedScore = newSeed(seedWord);
-      var calculatedScore = 5;
-      console.log("calculatedScore");
+      var hash = CryptoJS.SHA256(seedWord).toString();
+      console.log(hash);
+      var calculatedScore = newSeed(hash);
+      //var calculatedScore = 5;
+      console.log(calculatedScore);
       return calculatedScore;
     }
   });

@@ -1,29 +1,56 @@
 <head>
-  <title>My Meteor App</title>
+  <title>Banandom</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+  <link rel="stylesheet" href="/css/banandom.css">
 </head>
 
 <body>
-    {{> welcome}}
+    <div class="header">
+        <p class="banana">Impatient Banana<p class="title">Banandom</p></p>
+    </div>
+    <!--{{> UI.dynamic template=yourScore data=score}}-->
     {{> entryfield}}
     {{> scoreboard}}
 </body>
 
-<template name="welcome">
-    <h1>Welcome! Type in your name and word and shit</h1>
-</template>
-
 <template name="entryfield">
-        <input type="text" id="name" placeholder="Name" />
-        <input type="text" id="seedWord" placeholder="Your Word" />
-        <button type="button" name="entryfield" id="submitData">HellYeah</button>
+  <div class="form-group">
+      <input id="seed" class="form-control" type="text" placeholder="Seed" autofocus onkeydown="if(event.keyCode==13){document.getElementById('handle').focus()}">
+      <input id="handle" class="form-control" type="text" placeholder="Handle">
+  </div>
 
 </template>
 
 <template name="scoreboard">
-    <p>
+    <table class="table">
         {{#each scores}}
-            <h1>{{name}} </h1><br />
-            {{score}} <br /><br />
+            <tr>
+              <td>{{name}}</td>
+              <td>{{score}}</td>
+            </tr>
         {{/each}}
+    </table>
+</template>
+
+<template name="yourScore">
+  <div class="score">
+    <p>Your latest score is
+      <br />
+
+      <span class="scoreNumber">
+          {{score}}
+      </span>
+
+      <br />
+      Try again below if you'd like
     </p>
+  </div>
 </template>
