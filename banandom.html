@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/js/functions.js"></script>
 
 
   <link rel="stylesheet" href="/css/banandom.css">
@@ -16,9 +18,18 @@
     <div class="header">
         <p class="banana">Impatient Banana<p class="title">Banandom</p></p>
     </div>
+    {{> UI.dynamic template=yourScore}}
     <!--{{> UI.dynamic template=yourScore data=score}}-->
     {{> entryfield}}
     {{> scoreboard}}
+
+    <script src="/js/functions.js"></script>
+    <script>
+      $( "#hiddenInput" ).load(function() {
+        propagateIds();
+      });
+    </script>
+
 </body>
 
 <template name="entryfield">
@@ -30,27 +41,39 @@
 </template>
 
 <template name="scoreboard">
+
     <table class="table">
         {{#each scores}}
-            <tr>
-              <td>{{name}}</td>
-              <td>{{score}}</td>
-            </tr>
+          <tr class="trScores">
+            <td>{{name}}</td>
+            <td>
+              <script>processHandle(</script>
+              {{score}}
+              <script>);</script>
+            </td>
+          </tr>
         {{/each}}
     </table>
+
 </template>
 
 <template name="yourScore">
-  <div class="score">
-    <p>Your latest score is
-      <br />
+  {{#if score}}
+    <div class="score">
+      <p>Your latest score is
+        <br />
 
-      <span class="scoreNumber">
-          {{score}}
-      </span>
+        <span class="scoreNumber">
+            <script>numberWithCommas(</script>
+            {{score}}
+            <script>);</script>
+        </span>
 
-      <br />
-      Try again below if you'd like
-    </p>
-  </div>
+        <br />
+        <p>Try again below if youd like</p>
+      </p>
+    </div>
+  {{else}}
+    <input type="hidden" id="hiddenInput" />
+  {{/if}}
 </template>

@@ -1,24 +1,42 @@
-/* CSS declarations go here */
 table {
 	text-align: center;
 	font-size: 25px;
+	color: #FFFFFF;
+	background-color: #00D8FF;
 }
+
 .title {
 	font-size: 24px;
-	margin-top: 25px;
 	margin-left: 25px;
+	color: #FFFFFF;
 }
+
+.header {
+	background-color: #00D8FF;
+	padding-bottom: 4px;
+	padding-top: 25px;
+}
+
 .banana {
 	float: right;
-	font-size: 24px;
+	font-size:24px;
 	margin-right: 25px;
+	color: #FFFFFF;
 }
+
 .form-control{
 	height: 200px;
 	font-size: 100px;
 	text-align: center;
-	margin-bottom: 25px
+	margin-bottom: 25px;
+	color: #FFCF25;
+	border-color: #00D8FF;
 }
+
 .form-group {
 	margin: 25px;
+}
+
+body {
+	background-color: #E5E5ED;
 }

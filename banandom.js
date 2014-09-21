@@ -1,12 +1,20 @@
 Scoreboard = new Meteor.Collection('Scoreboard');
 
+var globalScore;
+
 if (Meteor.isClient) {
+  Meteor.startup(function () {
+  });
 
   Meteor.subscribe("scores");
-  
-  Template.scoreboard.scores = function(){
-    return Scoreboard.find({}, { sort: { score: -1 } } );
+
+  var scoresArray = Scoreboard.find({}, { sort: { score: -1 } , limit:50} );
+  console.log(scoresArray);
+
+  Template.scoreboard.scores = function() {
+    return scoresArray;
   };
+
 
   Template.entryfield.events = {
     "keydown #handle": function(event){
@@ -15,6 +23,7 @@ if (Meteor.isClient) {
         // Submit the form
         var seedWord = document.getElementById('seed').value;
         var handle = document.getElementById('handle').value;
+        
         console.log(seedWord);
         console.log(handle);
 
@@ -23,7 +32,17 @@ if (Meteor.isClient) {
             if (!err) {
 
               console.log(data);
-              Template.yourScore.score = data;
+
+              globalScore = data;
+              console.log(globalScore);
+
+
+              Template.yourScore.score = function() {
+                console.log(globalScore);
+                score = globalScore;
+                return score;
+              };
+
 
               if(handle !== ''){
 

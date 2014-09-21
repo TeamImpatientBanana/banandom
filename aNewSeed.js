@@ -32,37 +32,37 @@ newSeed = function(seed) {
 function md5ArrayToRandomAssNumberArray (splitSeed){
 	switch(splitSeed) {
 		case "0":
-			return "145243";
+			return "143";
 		case "1":
 			return "342";
 		case "2":
 			return "34";
 		case "3":
-			return "423463643";
+			return "42";
 		case "4":
-			return "23435";
+			return "243";
 		case "5":
-			return "6324534";
+			return "64";
 		case "6":
-			return "733";
+			return "453";
 		case "7":
 			return "84";
 		case "8":
 			return "9";
 		case "9":
-			return "1054";
+			return "104";
 		case "a":
-			return "1100";
+			return "110";
 		case "b":
-			return "176412";
+			return "112";
 		case "c":
 			return "13";
 		case "d":
 			return "154";
 		case "e":
-			return "1335";
+			return "145";
 		case "f":
-			return "16435";
+			return "193";
 	}
 }
 
