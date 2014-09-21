@@ -12,8 +12,8 @@ if (Meteor.isClient) {
     "click #submitData": function(event){
 
       // Submit the form
-      var name = document.getElementById('name');
-      var seedWord = document.getElementById('seedWord');
+      var name = document.getElementById('name').value;
+      var seedWord = document.getElementById('seedWord').value;
 
       Meteor.call('calculatedScoreMethod', seedWord, function (err, data) {
         if (!err) {
@@ -39,12 +39,20 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+
+  Scoreboard.allow({
+    'insert': function(userId, doc) {
+      return true;
+    }
+  });
+
   Meteor.publish("scores", function() {
     return Scoreboard.find({}, { sort: { score: -1 } } );
   });
   Meteor.methods({
     calculatedScoreMethod: function(seedWord) {
-      var calculatedScore = newSeed(seedWord);
+      //var calculatedScore = newSeed(seedWord);
+      var calculatedScore = 5;
       console.log("calculatedScore");
       return calculatedScore;
     }
