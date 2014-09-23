@@ -2,6 +2,8 @@ newSeed = function(seed) {
 
 	//seed = require('crypto').createHash('md5').update(seed).digest("hex");
 
+	//ANDREW, PUT THE THING THAT SHA 256s THINGS HERE SO I CAN MODIFY IT
+
 	var splitSeed = seed.split("");
 	console.log("splitSeed first split = "+splitSeed);
 
